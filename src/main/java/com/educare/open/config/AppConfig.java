@@ -23,6 +23,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.UniqueConstraint;
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -38,7 +39,6 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
     }
-
 
     //ThymeLeaf
     @Bean
