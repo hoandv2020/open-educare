@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -35,6 +32,7 @@ public class PostController {
 
     @Autowired
     CommentService commentService;
+
     @GetMapping
     public ModelAndView findAllByOrderByIdDesc(@PageableDefault(value = 10) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("index");
@@ -43,9 +41,9 @@ public class PostController {
         return modelAndView;
     }
 
-    @GetMapping("/search/{s}")
-    public ModelAndView search(@PathVariable("s") String search, @PageableDefault(value = 10) Pageable pageable) {
-        ModelAndView modelAndView = new ModelAndView();
+    @PostMapping
+    public ModelAndView search(@RequestParam("search") String search, @PageableDefault(value = 10) Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("posts", postService.searchByTitle(search, pageable));
 
         return modelAndView;
