@@ -3,10 +3,8 @@ package com.educare.open.controller;
 import com.educare.open.model.Comment;
 import com.educare.open.model.Post;
 import com.educare.open.model.User;
-import com.educare.open.service.CategoryService;
-import com.educare.open.service.CommentService;
-import com.educare.open.service.PostRateService;
-import com.educare.open.service.PostService;
+import com.educare.open.model.UserPost;
+import com.educare.open.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -35,6 +33,9 @@ public class PostController {
 
     @Autowired
     CommentService commentService;
+
+    @Autowired
+    UserPostService userPostService;
     @GetMapping
     public ModelAndView findAllByOrderByIdDesc(@PageableDefault(value = 10) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("index");
@@ -81,15 +82,20 @@ public class PostController {
         List<Comment> comments = commentService.findAllByPostID(id);
         modelAndView.addObject("comments",comments);
         modelAndView.addObject("post", postService.findById(id));
-        modelAndView.addObject("isRead", postService.isRead(((User)session.getAttribute("currentUser")).getId(), id));
+        User currentUser = (User) session.getAttribute("currentUser");
+        if (currentUser!=null){
+            modelAndView.addObject("isRead", postService.isRead(currentUser.getId(), id));
+        }
         modelAndView.addObject("rating", postRateService.avgRateByPostId(id));
         modelAndView.addObject("comments",comments);
         return modelAndView;
     }
     @PostMapping("/{id}/checkRead")
     public String checkRead(HttpSession session,@PathVariable("id") Integer id, RedirectAttributes redirectAttributes){
-
         User currentUser = (User) session.getAttribute("currentUser");
+        UserPost userPost = userPostService.getByUserIdAndPostId(currentUser.getId(),id);
+        userPost.setRead(true);
+        userPostService.save(userPost);
         redirectAttributes.addFlashAttribute("isRead", postService.isRead(
           currentUser.getId(), id));
 //        postRateService.save(currentUser, id);
