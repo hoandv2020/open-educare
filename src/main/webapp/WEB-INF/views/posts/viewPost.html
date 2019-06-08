@@ -8,6 +8,45 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <meta charset="UTF-8">
   <title th:object="${post}" th:utext="*{title}"></title>
+  <style type="text/css">
+    .rating{
+      display: inline-block;
+      font-weight: bold;
+      position: absolute;
+      right: 100px;
+      border: 2px solid red;
+      width: 50px;
+      text-align: center;
+      color: blue;
+      background-color: yellow;
+    }
+    .title{
+      display: inline-block;
+      text-align: center;
+      border: 3px solid brown;
+      width: 300px;
+      position: relative;
+      padding: 10px 10px;
+      left: 241px;
+      height: auto;
+      font-weight: bolder;
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+    .back {
+      display: inline-block;
+      position: relative;
+      margin-top: 25px;
+    }
+    .content{
+      position: relative;
+      margin-top: 25px;
+      display: inline-block;
+    }
+    .date{
+
+    }
+  </style>
 </head>
 <body>
 <nav th:replace="layout::header"></nav>
@@ -23,16 +62,21 @@
     </div>
     <div class="col-sm-9">
   <div>
-    <div th:text="${rating}" style="display: inline-block"></div>
-    <div th:object="${post}" th:utext="*{title}" style="display: inline-block"></div>
+    <div class="rating" th:text="${rating}"></div>
+    <div th:object="${post}" th:utext="*{title}" class="title"></div>
   </div>
+  <div th:object="${post}" th:utext="'<h3>Author: </h3> '+ '<h2>'+ *{user.getFullName()}+'</h2>'"></div>
+  <div class="content" th:object="${post}" th:utext="*{content}"></div>
+  <div class="date" th:object="${post}" th:utext="*{updateAt}?'Last update at '+ *{updateAt}:'Last update at '+ *{createAt}" ></div>
   <div th:object="${post}" th:utext="*{user}?'Author '+ *{user.getFullName()}:'Anonymous'"></div>
   <div th:object="${post}" th:utext="*{content}"></div>
   <div th:object="${post}" th:utext="*{updateAt}?'Last update at '+ *{updateAt}:'Last update at '+ *{createAt}" ></div>
   <div>
-    <form th:action="@{/comment}" method="post">
-      <textarea name="comment" id="" cols="30" rows="10"></textarea>
-      <button type="submit">Comment</button>
+    <form role="form" th:action="@{/comment}" method="post">
+      <div class="form-group">
+        <textarea class="form-control" rows="3" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-success">Submit</button>
     </form>
   </div>
   <div >
@@ -40,7 +84,7 @@
   </div>
   <div>
     <div style="display: inline-block">
-      <a href="#" onclick="window.history.back()">Back to topic</a>
+      <button class="btn btn-success" href="#" onclick="window.history.back()">Back to topic</button>
     </div>
     <div style="display: inline-block" th:style="${isLogin}?:'display:none'">
       <form th:action="@{/post/rate/__${post.id}__}" method="post">
@@ -54,6 +98,8 @@
       </form>
     </div>
     <div style="display: inline-block"  th:style="${isLogin}?:'display:none'">
+    <div style="display: inline-block" th:object="${session.getAttribute('currentUser')}" th:style="">
+    <div class="back">
       <form th:action="@{/post/__${post.getId()}__/checkRead}" method="post" th:value="isRead.checked">
         <input type="checkbox" th:checked="${isRead}?'checked'" onChange="this.form.submit()" id="isRead">Read</input>
       </form>
@@ -61,6 +107,8 @@
   </div>
     </div>
   </div>
+</div>
+</div>
 </div>
 <div th:replace="layout::footer"></div>
 </body>
