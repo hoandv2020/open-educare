@@ -5,20 +5,20 @@ import com.educare.open.utils.Rate;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "post_rate")
+//@Entity
+//@Table(name = "post_rate")
 public class PostRate implements Serializable {
-    @Column(name = "rate")
+//    @Column(name = "rate")
     private Integer rate;
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "post_id")
+//    @Id
+//    @ManyToOne
+//    @JoinColumn(name = "post_id")
     private Post post;
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "rated_by")
+//    @Id
+//    @ManyToOne
+//    @JoinColumn(name = "rated_by")
     private User user;
 
     public PostRate(Rate rate, Post post, User user) {

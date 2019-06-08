@@ -2,14 +2,14 @@ package com.educare.open.model;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "role")
+//@Entity
+//@Table(name = "role")
 public class Role {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "name")
+//    @Column(name = "name")
     private String name;
 
     public Role() {

@@ -3,34 +3,34 @@ package com.educare.open.model;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity
-@Table(name = "post")
+//@Entity
+//@Table(name = "post")
 public class Post {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "title")
+//    @Column(name = "title")
     private String title;
 
-    @Column(name = "content")
+//    @Column(name = "content")
     private String content;
 
 
-    @Column(name = "view_count")
+//    @Column(name = "view_count")
     private Integer viewCount;
 
-    @Column(name = "create_at")
+//    @Column(name = "create_at")
     private Timestamp createAt;
 
-    @Column(name = "update_at")
+//    @Column(name = "update_at")
     private Timestamp updateAt;
 
-    @Column(name = "tags")
+//    @Column(name = "tags")
     private String tags;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
+//    @ManyToOne
+//    @JoinColumn(name = "category_id")
     private Category category;
 
     public Post() {

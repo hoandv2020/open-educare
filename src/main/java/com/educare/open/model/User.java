@@ -5,35 +5,35 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "user")
+//@Entity
+//@Table(name = "user")
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "full_name")
+//    @Column(name = "full_name")
     private String fullName;
 
-    @Column(name = "username")
+//    @Column(name = "username")
     private String username;
 
-    @Column(name = "password")
+//    @Column(name = "password")
     private String password;
 
-    @Column(name = "age")
+//    @Column(name = "age")
     private Integer age;
 
-    @Column(name = "sex")
+//    @Column(name = "sex")
     private Boolean sex;
 
-    @Column(name = "birthday")
+//    @Column(name = "birthday")
     private Date birthday;
 
-    @Column(name = "create_at")
+//    @Column(name = "create_at")
     private Timestamp createAt;
 
-    @Column(name = "update_at")
+//    @Column(name = "update_at")
     private Timestamp updateAt;
 
     public User() {

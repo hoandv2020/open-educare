@@ -3,20 +3,20 @@ package com.educare.open.model;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "user_post")
+//@Entity
+//@Table(name = "user_post")
 public class UserPost implements Serializable {
-    @Column(name = "isRead")
+//    @Column(name = "isRead")
     private Boolean isRead;
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+//    @Id
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
     private User user;
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "post_id")
+//    @Id
+//    @ManyToOne
+//    @JoinColumn(name = "post_id")
     private Post post;
 
     public UserPost() {
