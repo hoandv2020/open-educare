@@ -1,7 +1,5 @@
 package com.educare.open.model;
 
-import com.educare.open.utils.Rate;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -26,18 +24,26 @@ public class PostRate implements Serializable {
     public PostRate() {
     }
 
-    public PostRate(Rate rate, Post post, User user) {
-        this.rate = rate.getValue();
+    public PostRate(Integer rate, Post post, User user) {
+        this.rate = rate;
         this.post = post;
         this.user = user;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getRate() {
         return rate;
     }
 
-    public void setRate(Rate rate) {
-        this.rate = rate.getValue();
+    public void setRate(Integer rate) {
+        this.rate = rate;
     }
 
     public Post getPost() {
