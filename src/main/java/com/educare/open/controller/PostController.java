@@ -34,6 +34,9 @@ public class PostController {
     @Autowired
     UserPostService userPostService;
 
+    @Autowired
+    UserCategoryService userCategoryService;
+
     @GetMapping
     public ModelAndView findAllByOrderByIdDesc(@PageableDefault(value = 10) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("index");
@@ -81,9 +84,12 @@ public class PostController {
         modelAndView.addObject("comments",comments);
         modelAndView.addObject("post", postService.findById(id));
         User currentUser = (User) session.getAttribute("currentUser");
+        boolean isLogin = false;
         if (currentUser!=null){
             modelAndView.addObject("isRead", postService.isRead(currentUser.getId(), id));
+            isLogin = true;
         }
+        modelAndView.addObject("isLogin", isLogin);
         modelAndView.addObject("rating", postRateService.avgRateByPostId(id));
         modelAndView.addObject("comments",comments);
         return modelAndView;
@@ -94,9 +100,9 @@ public class PostController {
         UserPost userPost = userPostService.getByUserIdAndPostId(currentUser.getId(),id);
         userPost.setRead(true);
         userPostService.save(userPost);
+        userCategoryService.save(currentUser,userPost.getPost().getCategory(),userPost.getRead());
         redirectAttributes.addFlashAttribute("isRead", postService.isRead(
           currentUser.getId(), id));
-//        postRateService.save(currentUser, id);
         return "redirect:/post/"+id;
     }
     @GetMapping("/category/{id}")
@@ -111,7 +117,6 @@ public class PostController {
         ModelAndView modelAndView = new ModelAndView("redirect:/post/" + postId);
         User currentUser = (User) session.getAttribute("currentUser");
         postRateService.save(postId, currentUser, rate);
-
         return modelAndView;
     }
 

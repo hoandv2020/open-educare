@@ -23,7 +23,7 @@ public class UserCategory implements Serializable {
   public UserCategory() {
   }
 
-  public UserCategory(Boolean isRead, User user, Category category) {
+  public UserCategory(User user, Category category,Boolean isRead) {
     this.isRead = isRead;
     this.user = user;
     this.category = category;
