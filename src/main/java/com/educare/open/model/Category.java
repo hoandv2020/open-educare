@@ -2,18 +2,18 @@ package com.educare.open.model;
 
 import javax.persistence.*;
 
-//@Entity
-//@Table(name = "category")
+@Entity
+@Table(name = "category")
 public class Category {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-//    @Column(name = "name")
+    @Column(name = "name")
     private String name;
 
-//    @OneToOne
-//    @JoinColumn(name = "child_of")
+    @OneToOne
+    @JoinColumn(name = "child_of")
     private Category category;
 
     public Category() {

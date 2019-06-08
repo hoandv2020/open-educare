@@ -3,28 +3,28 @@ package com.educare.open.model;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-//@Entity
-//@Table(name = "comment")
+@Entity
+@Table(name = "comment")
 public class Comment {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-//    @Column(name = "content")
+    @Column(name = "content")
     private String content;
 
-//    @Column(name = "create_at")
+    @Column(name = "create_at")
     private Timestamp createAt;
 
-//    @Column(name = "update_at")
+    @Column(name = "update_at")
     private Timestamp updateAt;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-//    @ManyToOne
-//    @JoinColumn(name = "post_id")
+    @ManyToOne
+    @JoinColumn(name = "post_id")
     private Post post;
 
     public Comment() {

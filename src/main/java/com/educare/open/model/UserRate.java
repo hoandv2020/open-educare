@@ -5,26 +5,36 @@ import com.educare.open.utils.Rate;
 import javax.persistence.*;
 import java.io.Serializable;
 
-//@Entity
-//@Table(name = "user_rate")
+@Entity
+@Table(name = "user_rate")
 public class UserRate implements Serializable {
-//    @Column(name = "rate")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(name = "rate")
     private Integer rate;
 
-//    @Id
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-//    @Id
-//    @ManyToOne
-//    @JoinColumn(name = "rated_by")
+    @ManyToOne
+    @JoinColumn(name = "rated_by")
     private User userRated;
 
     public UserRate(Rate rate, User user, User userRated) {
         this.rate = rate.getValue();
         this.user = user;
         this.userRated = userRated;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getRate() {

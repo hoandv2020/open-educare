@@ -3,20 +3,22 @@ package com.educare.open.model;
 import javax.persistence.*;
 import java.io.Serializable;
 
-//@Entity
-//@Table(name = "user_post")
+@Entity
+@Table(name = "user_post")
 public class UserPost implements Serializable {
-//    @Column(name = "isRead")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(name = "isRead")
     private Boolean isRead;
 
-//    @Id
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-//    @Id
-//    @ManyToOne
-//    @JoinColumn(name = "post_id")
+    @ManyToOne
+    @JoinColumn(name = "post_id")
     private Post post;
 
     public UserPost() {
@@ -26,6 +28,14 @@ public class UserPost implements Serializable {
         this.isRead = isRead;
         this.user = user;
         this.post = post;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Boolean getRead() {

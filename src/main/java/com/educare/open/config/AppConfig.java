@@ -155,9 +155,4 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
     public UserRateService userRateService() {
         return new UserRateServiceImpl();
     }
-
-    @Bean
-    public UserRoleService userRoleService() {
-        return new UserRoleServiceImpl();
-    }
 }

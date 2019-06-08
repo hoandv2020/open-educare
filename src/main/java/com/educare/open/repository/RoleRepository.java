@@ -1,4 +1,7 @@
 package com.educare.open.repository;
 
-public class RoleRepository {
+import com.educare.open.model.Role;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface RoleRepository extends JpaRepository<Role, Integer> {
 }

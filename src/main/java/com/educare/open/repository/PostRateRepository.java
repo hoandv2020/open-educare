@@ -1,4 +1,7 @@
 package com.educare.open.repository;
 
-public class PostRateRepository {
+import com.educare.open.model.Post;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PostRateRepository extends JpaRepository<Post, Integer> {
 }
