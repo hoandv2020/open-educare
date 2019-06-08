@@ -33,6 +33,19 @@
       font-size: 30px;
       margin-bottom: 20px;
     }
+    .back {
+      display: inline-block;
+      position: relative;
+      margin-top: 25px;
+    }
+    .content{
+      position: relative;
+      margin-top: 25px;
+      display: inline-block;
+    }
+    .date{
+
+    }
   </style>
 </head>
 <body>
@@ -52,13 +65,15 @@
     <div class="rating" th:text="${rating}"></div>
     <div th:object="${post}" th:utext="*{title}" class="title"></div>
   </div>
-  <div th:object="${post}" th:utext="'Author '+ *{user.getFullName()}"></div>
-  <div th:object="${post}" th:utext="*{content}"></div>
-  <div th:object="${post}" th:utext="*{updateAt}?'Last update at '+ *{updateAt}:'Last update at '+ *{createAt}" ></div>
+  <div th:object="${post}" th:utext="'<h3>Author: </h3> '+ '<h2>'+ *{user.getFullName()}+'</h2>'"></div>
+  <div class="content" th:object="${post}" th:utext="*{content}"></div>
+  <div class="date" th:object="${post}" th:utext="*{updateAt}?'Last update at '+ *{updateAt}:'Last update at '+ *{createAt}" ></div>
   <div>
-    <form th:action="@{/comment}" method="post">
-      <textarea name="comment" id="" cols="30" rows="10"></textarea>
-      <button type="submit">Comment</button>
+    <form role="form" th:action="@{/comment}" method="post">
+      <div class="form-group">
+        <textarea class="form-control" rows="3" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-success">Submit</button>
     </form>
   </div>
   <div >
@@ -66,7 +81,7 @@
   </div>
   <div>
     <div style="display: inline-block">
-      <a href="#" onclick="window.history.back()">Back to topic</a>
+      <button class="btn btn-success" href="#" onclick="window.history.back()">Back to topic</button>
     </div>
     <div style="display: inline-block">
       <form th:action="@{/rate}" method="post">
@@ -79,7 +94,7 @@
         </select>
       </form>
     </div>
-    <div style="display: inline-block">
+    <div class="back">
       <form th:action="@{/post/__${post.getId()}__/checkRead}" method="post" th:value="isRead.checked">
         <input type="checkbox" th:checked="${isRead}?'checked'" onChange="this.form.submit()" id="isRead">Read</input>
       </form>
