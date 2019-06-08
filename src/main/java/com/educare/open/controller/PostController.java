@@ -3,10 +3,8 @@ package com.educare.open.controller;
 import com.educare.open.model.Comment;
 import com.educare.open.model.Post;
 import com.educare.open.model.User;
-import com.educare.open.service.CategoryService;
-import com.educare.open.service.CommentService;
-import com.educare.open.service.PostRateService;
-import com.educare.open.service.PostService;
+import com.educare.open.model.UserPost;
+import com.educare.open.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,6 +31,9 @@ public class PostController {
 
     @Autowired
     CommentService commentService;
+
+    @Autowired
+    UserPostService userPostService;
 
     @GetMapping
     public ModelAndView findAllByOrderByIdDesc(@PageableDefault(value = 10) Pageable pageable) {
@@ -80,15 +81,20 @@ public class PostController {
         List<Comment> comments = commentService.findAllByPostID(id);
         modelAndView.addObject("comments",comments);
         modelAndView.addObject("post", postService.findById(id));
-        modelAndView.addObject("isRead", postService.isRead(((User)session.getAttribute("currentUser")).getId(), id));
+        User currentUser = (User) session.getAttribute("currentUser");
+        if (currentUser!=null){
+            modelAndView.addObject("isRead", postService.isRead(currentUser.getId(), id));
+        }
         modelAndView.addObject("rating", postRateService.avgRateByPostId(id));
         modelAndView.addObject("comments",comments);
         return modelAndView;
     }
     @PostMapping("/{id}/checkRead")
     public String checkRead(HttpSession session,@PathVariable("id") Integer id, RedirectAttributes redirectAttributes){
-
         User currentUser = (User) session.getAttribute("currentUser");
+        UserPost userPost = userPostService.getByUserIdAndPostId(currentUser.getId(),id);
+        userPost.setRead(true);
+        userPostService.save(userPost);
         redirectAttributes.addFlashAttribute("isRead", postService.isRead(
           currentUser.getId(), id));
 //        postRateService.save(currentUser, id);
@@ -98,6 +104,15 @@ public class PostController {
     public ModelAndView searchByCategory(@PathVariable("id") Integer id, @PageableDefault(value = 10) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("posts", postService.searchByCategoryId(id, pageable));
+        return modelAndView;
+    }
+
+    @PostMapping("/rate/{postId}")
+    public ModelAndView rate(@PathVariable("postId") Integer postId, @RequestParam("rate") Integer rate, HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView("redirect:/post/" + postId);
+        User currentUser = (User) session.getAttribute("currentUser");
+        postRateService.save(postId, currentUser, rate);
+
         return modelAndView;
     }
 

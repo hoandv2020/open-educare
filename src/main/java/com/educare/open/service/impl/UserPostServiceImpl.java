@@ -11,6 +11,16 @@ public class UserPostServiceImpl implements UserPostService {
   @Autowired
   private UserPostRepository userPostRepository;
 
+  @Override
+  public UserPost getByUserIdAndPostId(Integer userId, Integer postId) {
+    return userPostRepository.getByUserIdAndPostId(userId,postId);
+  }
+
+  @Override
+  public void save(UserPost userPost) {
+    userPostRepository.save(userPost);
+  }
+
 //  @Autowired
 //  private PostRepository userPostRepository;
 //  @Override
