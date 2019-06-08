@@ -43,14 +43,21 @@
             <p>Food is my passion. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
             <br><br>
 
-            <h4><small>RECENT POSTS</small></h4>
-            <hr>
-            <h2>Officially Blogging</h2>
-            <h5><span class="glyphicon glyphicon-time"></span> Post by John Doe, Sep 24, 2015.</h5>
-            <h5><span class="label label-success">Lorem</span></h5><br>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <hr>
+            <th:block th:each="post: ${posts}">
+                <div>
+                    <a th:href="@{/post/__${post.id}__}"><h2 th:text="${post.title}"></h2></a>
+                    <!--<h5 th:text="${post.}"><span class="glyphicon glyphicon-time"></span></h5>-->
+                    <p th:text="${post.content}"></p>
+                </div>
+            </th:block>
 
+
+            <hr>
+            <div>
+                <a th:href="@{'/post'(page=${posts.number - 1})}" th:if="${posts.hasPrevious()}">Previous</a>
+                <span th:text="${posts.number + 1}"></span>/<span th:text="${posts.totalPages}"></span>
+                <a th:href="@{'/post'(page=${posts.number + 2},size=10)}" th:if="${posts.hasNext()}">Next</a>
+            </div>
             <h4>Leave a Comment:</h4>
             <form role="form">
                 <div class="form-group">
