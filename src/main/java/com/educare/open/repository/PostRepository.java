@@ -8,5 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface PostRepository extends JpaRepository<Post, Integer> {
     Page<Post> findAllByOrderByIdDesc(Pageable pageable);
 
-    Page<Post> findAllByTitleLike(String search, Pageable pageable);
+    Page<Post> findAllByTitleContaining(String search, Pageable pageable);
+
+    Page<Post> findAllByCategoryId(Integer id, Pageable pageable);
 }

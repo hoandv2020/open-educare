@@ -52,9 +52,18 @@
     <div class="rating" th:text="${rating}"></div>
     <div th:object="${post}" th:utext="*{title}" class="title"></div>
   </div>
-  <div th:object="${post}" th:utext="*{user}"></div>
+  <div th:object="${post}" th:utext="'Author '+ *{user.getFullName()}"></div>
   <div th:object="${post}" th:utext="*{content}"></div>
   <div th:object="${post}" th:utext="*{updateAt}?'Last update at '+ *{updateAt}:'Last update at '+ *{createAt}" ></div>
+  <div>
+    <form th:action="@{/comment}" method="post">
+      <textarea name="comment" id="" cols="30" rows="10"></textarea>
+      <button type="submit">Comment</button>
+    </form>
+  </div>
+  <div >
+    <div th:each="comment:${comments}" th:utext="comment.getContent()"></div>
+  </div>
   <div>
     <div style="display: inline-block">
       <a href="#" onclick="window.history.back()">Back to topic</a>
@@ -71,7 +80,7 @@
       </form>
     </div>
     <div style="display: inline-block">
-      <form th:action="@{/userId}" method="post" th:value="isRead.checked">
+      <form th:action="@{/post/__${post.getId()}__/checkRead}" method="post" th:value="isRead.checked">
         <input type="checkbox" th:checked="${isRead}?'checked'" onChange="this.form.submit()" id="isRead">Read</input>
       </form>
     </div>

@@ -23,16 +23,22 @@
 
         </style>
         <input name="s" type="text" class="form-control" placeholder="Search..." />
+        <form action="/post" method="post">
+        <input name="search" type="text" class="form-control" placeholder="Search...">
         <span class="input-group-btn">
           <button class="btn btn-default" type="submit">
             <span class="glyphicon glyphicon-search"></span>
           </button>
         </span>
+        </form>
+
         <span class="input-group-btn">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span></button>
                         <ul class="dropdown-menu">
                           <li><a href="/user/login">Profile</a></li>
                           <li><a href="#">Progress</a></li>
+                          <li><a href="#">Profile</a></li>
+                          <li><a th:href="@{/studyProgress}">Progress</a></li>
                           <li><a href="/user/logout">Logout</a></li>
                         </ul>
                 </span>

@@ -35,7 +35,7 @@ public class UserController {
             if (user.getPassword().equals(password)) {
                 session.setAttribute("currentUser", user);
                 isSuccess = true;
-                modelAndView.setViewName("index");
+                modelAndView.setViewName("redirect:/");
             }
         }
 

@@ -18,4 +18,6 @@ public interface PostService {
     Boolean isRead(Integer userId, Integer postId);
 
     Page<Post> searchByTitle(String search, Pageable pageable);
+
+    Page<Post> searchByCategoryId(Integer id, Pageable pageable);
 }
