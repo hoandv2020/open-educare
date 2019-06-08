@@ -28,7 +28,7 @@ public class PostRateServiceImpl implements PostRateService {
             sum += postRate.getRate();
         }
 
-        return sum / postRates.size();
+        return Float.parseFloat(String.format("%.01f", sum / postRates.size()));
     }
 
     @Override
