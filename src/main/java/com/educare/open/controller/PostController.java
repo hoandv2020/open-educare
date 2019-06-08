@@ -33,6 +33,14 @@ public class PostController {
         return modelAndView;
     }
 
+    @GetMapping("/search/{s}")
+    public ModelAndView search(@PathVariable("s") String search, Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("posts", postService.searchByTitle(search, pageable));
+
+        return modelAndView;
+    }
+
     @GetMapping("/create")
     public ModelAndView create() {
         ModelAndView modelAndView = new ModelAndView("/posts/create");

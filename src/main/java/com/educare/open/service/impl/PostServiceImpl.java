@@ -46,6 +46,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public Page<Post> searchByTitle(String search, Pageable pageable) {
+        return postRepository.findAllByTitleLike(search, pageable);
+    }
+
+    @Override
     public Page<Post> findAllByOrderByIdDesc(Pageable pageable) {
         return postRepository.findAllByOrderByIdDesc(pageable);
     }

@@ -14,4 +14,6 @@ public interface PostService {
     void deleteById(Integer id);
 
     Boolean isRead(Integer userId, Integer postId);
+
+    Page<Post> searchByTitle(String search, Pageable pageable);
 }
