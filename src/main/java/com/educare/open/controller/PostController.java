@@ -77,4 +77,12 @@ public class PostController {
         return modelAndView;
     }
 
+    @GetMapping("/category/{id}")
+    public ModelAndView searchByCategory(@PathVariable("id") Integer id, @PageableDefault(value = 10) Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("index");
+        modelAndView.addObject("posts", postService.searchByCategoryId(id, pageable));
+
+        return modelAndView;
+    }
+
 }
