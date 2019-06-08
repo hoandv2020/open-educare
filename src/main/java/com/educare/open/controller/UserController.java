@@ -45,10 +45,9 @@ public class UserController {
     }
 
     @GetMapping("/logout")
-    public ModelAndView logout(HttpSession session) {
-        ModelAndView modelAndView = new ModelAndView("index");
+    public String logout(HttpSession session) {
         session.removeAttribute("currentUser");
 
-        return modelAndView;
+        return "redirect:/";
     }
 }
