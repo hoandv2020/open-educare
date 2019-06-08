@@ -2,6 +2,7 @@ package com.educare.open.controller;
 
 import com.educare.open.model.Post;
 import com.educare.open.service.CategoryService;
+import com.educare.open.service.PostRateService;
 import com.educare.open.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +21,9 @@ public class PostController {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private PostRateService postRateService;
 
     @GetMapping
     public ModelAndView findAll(Pageable pageable) {
@@ -57,6 +61,8 @@ public class PostController {
     public ModelAndView view(@PathVariable("id") Integer id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("post", postService.findById(id));
+        modelAndView.addObject("isRead", postService.isRead(null, id));
+        modelAndView.addObject("rating", postRateService.avgRateByPostId(id));
 
         return modelAndView;
     }
