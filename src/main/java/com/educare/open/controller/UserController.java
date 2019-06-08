@@ -35,7 +35,7 @@ public class UserController {
             if (user.getPassword().equals(password)) {
                 session.setAttribute("currentUser", user);
                 isSuccess = true;
-                modelAndView.setViewName("index");
+                modelAndView.setViewName("redirect:/");
             }
         }
 
@@ -45,10 +45,9 @@ public class UserController {
     }
 
     @GetMapping("/logout")
-    public ModelAndView logout(HttpSession session) {
-        ModelAndView modelAndView = new ModelAndView("index");
+    public String logout(HttpSession session) {
         session.removeAttribute("currentUser");
 
-        return modelAndView;
+        return "redirect:/";
     }
 }
