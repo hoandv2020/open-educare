@@ -100,4 +100,13 @@ public class PostController {
         return modelAndView;
     }
 
+    @PostMapping("/rate/{postId}")
+    public ModelAndView rate(@PathVariable("postId") Integer postId, @RequestParam("rate") Integer rate, HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView("redirect:/post/" + postId);
+        User currentUser = (User) session.getAttribute("currentUser");
+        postRateService.save(postId, currentUser, rate);
+
+        return modelAndView;
+    }
+
 }
