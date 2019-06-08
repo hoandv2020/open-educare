@@ -8,6 +8,32 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <meta charset="UTF-8">
   <title th:object="${post}" th:utext="*{title}"></title>
+  <style type="text/css">
+    .rating{
+      display: inline-block;
+      font-weight: bold;
+      position: absolute;
+      right: 100px;
+      border: 2px solid red;
+      width: 50px;
+      text-align: center;
+      color: blue;
+      background-color: yellow;
+    }
+    .title{
+      display: inline-block;
+      text-align: center;
+      border: 3px solid brown;
+      width: 300px;
+      position: relative;
+      padding: 10px 10px;
+      left: 241px;
+      height: auto;
+      font-weight: bolder;
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 <body>
 <nav th:replace="layout::header"></nav>
@@ -23,8 +49,8 @@
     </div>
     <div class="col-sm-9">
   <div>
-    <div th:text="${rating}" style="display: inline-block"></div>
-    <div th:object="${post}" th:utext="*{title}" style="display: inline-block"></div>
+    <div class="rating" th:text="${rating}"></div>
+    <div th:object="${post}" th:utext="*{title}" class="title"></div>
   </div>
   <div th:object="${post}" th:utext="*{user}"></div>
   <div th:object="${post}" th:utext="*{content}"></div>
