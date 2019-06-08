@@ -33,7 +33,7 @@ public class PostController {
     public ModelAndView create() {
         ModelAndView modelAndView = new ModelAndView("/posts/create");
         modelAndView.addObject("post", new Post());
-        modelAndView.addObject("categories", null);
+        modelAndView.addObject("categories", categoryService.findAll());
 
         return modelAndView;
     }
