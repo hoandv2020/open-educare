@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 public class PostServiceImpl implements PostService {
     @Autowired
     private PostRepository postRepository;
@@ -18,6 +21,8 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void save(Post post) {
+        Date date = new Date();
+        post.setCreateAt(new Timestamp(date.getTime()));
         postRepository.save(post);
     }
 
