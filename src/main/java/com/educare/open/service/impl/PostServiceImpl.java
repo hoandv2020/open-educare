@@ -1,7 +1,6 @@
 package com.educare.open.service.impl;
 
 import com.educare.open.model.Post;
-import com.educare.open.model.User;
 import com.educare.open.model.UserPost;
 import com.educare.open.repository.PostRepository;
 import com.educare.open.repository.UserPostRepository;
@@ -47,7 +46,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Page<Post> findAll(Pageable pageable) {
-        return postRepository.findAll(pageable);
+    public Page<Post> findAllByOrderByIdDesc(Pageable pageable) {
+        return postRepository.findAllByOrderByIdDesc(pageable);
     }
 }
