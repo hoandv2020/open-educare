@@ -1,6 +1,7 @@
 package com.educare.open.service.impl;
 
 import com.educare.open.model.Post;
+import com.educare.open.model.User;
 import com.educare.open.model.UserPost;
 import com.educare.open.repository.PostRepository;
 import com.educare.open.repository.UserPostRepository;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -25,8 +27,9 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void save(Post post) {
+    public void save(Post post, HttpSession session) {
         Date date = new Date();
+        post.setUser((User) session.getAttribute("currentUser"));
         post.setCreateAt(new Timestamp(date.getTime()));
         postRepository.save(post);
     }
