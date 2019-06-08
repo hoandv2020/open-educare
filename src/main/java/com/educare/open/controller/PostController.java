@@ -7,6 +7,7 @@ import com.educare.open.service.PostService;
 import com.educare.open.utils.Rate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +28,7 @@ public class PostController {
     private PostRateService postRateService;
 
     @GetMapping
-    public ModelAndView findAllByOrderByIdDesc(Pageable pageable) {
+    public ModelAndView findAllByOrderByIdDesc(@PageableDefault(value = 10) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("posts", postService.findAllByOrderByIdDesc(pageable));
 
@@ -35,7 +36,7 @@ public class PostController {
     }
 
     @GetMapping("/search/{s}")
-    public ModelAndView search(@PathVariable("s") String search, Pageable pageable) {
+    public ModelAndView search(@PathVariable("s") String search, @PageableDefault(value = 10) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("posts", postService.searchByTitle(search, pageable));
 
