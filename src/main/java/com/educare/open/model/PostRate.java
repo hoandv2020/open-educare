@@ -23,6 +23,9 @@ public class PostRate implements Serializable {
     @JoinColumn(name = "rated_by")
     private User user;
 
+    public PostRate() {
+    }
+
     public PostRate(Rate rate, Post post, User user) {
         this.rate = rate.getValue();
         this.post = post;

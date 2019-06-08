@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:object="${post}" th:utext="*{title}"></title>
+</head>
+<body>
+  <div>
+    <div th:text="${rating}" style="display: inline-block"></div>
+    <div th:object="${post}" th:utext="*{title}" style="display: inline-block"></div>
+  </div>
+  <div th:object="${post}" th:utext="*{user}"></div>
+  <div th:object="${post}" th:utext="*{content}"></div>
+  <div th:object="${post}" th:utext="*{updateAt}?'Last update at '+ *{updateAt}:'Last update at '+ *{createAt}" ></div>
+  <div>
+    <div style="display: inline-block">
+      <a th:href="@{posts}">Back to topic</a>
+    </div>
+    <div style="display: inline-block">
+      <form th:action="@{/rate}" method="post">
+        <select name="rate" id="rate">
+          <option th:value="${1}" >Very bad</option>
+          <option th:value="${2}" >Bad</option>
+          <option th:value="${3}" >Average</option>
+          <option th:value="${4}" >Good</option>
+          <option th:value="${5}" >Very good</option>
+        </select>
+      </form>
+    </div>
+    <div style="display: inline-block">
+      <form th:action="@{/userId}" method="post">
+        <input type="checkbox" th:value="${isRead}">Read</input>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
