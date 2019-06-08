@@ -1,5 +1,7 @@
 package com.educare.open.config;
 
+import com.educare.open.service.*;
+import com.educare.open.service.impl.*;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -111,5 +113,51 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(emf);
         return transactionManager;
+    }
+
+    //Service
+    @Bean
+    public CategoryService categoryService() {
+        return new CategoryServiceImpl();
+    }
+
+    @Bean
+    public CommentService commentService() {
+        return new CommentServiceImpl();
+    }
+
+    @Bean
+    public PostService postService() {
+        return new PostServiceImpl();
+    }
+
+    @Bean
+    public PostRateService postRateService() {
+        return new PostRateServiceImpl();
+    }
+
+    @Bean
+    public RoleService roleService() {
+        return new RoleServiceImpl();
+    }
+
+    @Bean
+    public UserService userService() {
+        return new UserServiceImpl();
+    }
+
+    @Bean
+    public UserPostService userPostService() {
+        return new UserPostServiceImpl();
+    }
+
+    @Bean
+    public UserRateService userRateService() {
+        return new UserRateServiceImpl();
+    }
+
+    @Bean
+    public UserRoleService userRoleService() {
+        return new UserRoleServiceImpl();
     }
 }
