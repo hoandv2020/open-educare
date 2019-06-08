@@ -66,4 +66,5 @@ public class PostController {
         modelAndView.addObject("rating", postRateService.avgRateByPostId(id));
         return modelAndView;
     }
+
 }

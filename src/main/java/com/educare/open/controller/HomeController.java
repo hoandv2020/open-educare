@@ -18,4 +18,8 @@ public class HomeController {
     public ModelAndView index(Pageable pageable) {
         return new ModelAndView("index", "posts", postService.findAllByOrderByIdDesc(pageable));
     }
+    @GetMapping("/studyProgress")
+    public ModelAndView studyTree(){
+        return new ModelAndView("studyProgress");
+    }
 }
