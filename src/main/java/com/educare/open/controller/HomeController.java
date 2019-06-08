@@ -16,6 +16,6 @@ public class HomeController {
 
     @GetMapping
     public ModelAndView index(Pageable pageable) {
-        return new ModelAndView("index", "posts", postService.findAll(pageable));
+        return new ModelAndView("index", "posts", postService.findAllByOrderByIdDesc(pageable));
     }
 }

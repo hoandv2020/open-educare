@@ -26,9 +26,9 @@ public class PostController {
     private PostRateService postRateService;
 
     @GetMapping
-    public ModelAndView findAll(Pageable pageable) {
+    public ModelAndView findAllByOrderByIdDesc(Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("posts", postService.findAll(pageable));
+        modelAndView.addObject("posts", postService.findAllByOrderByIdDesc(pageable));
 
         return modelAndView;
     }
