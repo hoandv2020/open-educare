@@ -4,15 +4,17 @@ import com.educare.open.model.Post;
 import com.educare.open.service.CategoryService;
 import com.educare.open.service.PostRateService;
 import com.educare.open.service.PostService;
-import com.educare.open.utils.Rate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/post")
@@ -27,9 +29,17 @@ public class PostController {
     private PostRateService postRateService;
 
     @GetMapping
-    public ModelAndView findAllByOrderByIdDesc(Pageable pageable) {
+    public ModelAndView findAllByOrderByIdDesc(@PageableDefault(value = 10) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("posts", postService.findAllByOrderByIdDesc(pageable));
+
+        return modelAndView;
+    }
+
+    @GetMapping("/search/{s}")
+    public ModelAndView search(@PathVariable("s") String search, @PageableDefault(value = 10) Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("posts", postService.searchByTitle(search, pageable));
 
         return modelAndView;
     }
@@ -44,8 +54,8 @@ public class PostController {
     }
 
     @PostMapping(value = {"/create", "update"})
-    public String save(Post post) {
-        postService.save(post);
+    public String save(Post post, HttpSession session) {
+        postService.save(post, session);
 
         return "redirect:/";
     }
