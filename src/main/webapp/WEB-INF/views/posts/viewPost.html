@@ -11,6 +11,7 @@
   </div>
   <div th:object="${post}" th:utext="*{user}"></div>
   <div th:object="${post}" th:utext="*{content}"></div>
+  <div th:object="${post}" th:utext="*{updateAt}?'Last update at '+ *{updateAt}:'Last update at '+ *{createAt}" ></div>
   <div>
     <div style="display: inline-block">
       <a th:href="@{posts}">Back to topic</a>
