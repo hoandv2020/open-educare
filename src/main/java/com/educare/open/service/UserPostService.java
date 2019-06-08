@@ -4,5 +4,6 @@ import com.educare.open.model.User;
 import com.educare.open.model.UserPost;
 
 public interface UserPostService {
-//  void save(User user, Integer postId);
+  UserPost getByUserIdAndPostId(Integer userId, Integer postId);
+  void save(UserPost userPost);
 }

@@ -53,7 +53,7 @@
         </select>
       </form>
     </div>
-    <div style="display: inline-block">
+    <div style="display: inline-block" th:object="${session.getAttribute('currentUser')}">
       <form th:action="@{/post/__${post.getId()}__/checkRead}" method="post" th:value="isRead.checked">
         <input type="checkbox" th:checked="${isRead}?'checked'" onChange="this.form.submit()" id="isRead">Read</input>
       </form>
