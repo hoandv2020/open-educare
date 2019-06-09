@@ -41,7 +41,7 @@
                 <div>
                     <a th:href="@{/post/__${post.id}__}"><h2 th:utext="${post.title}"></h2></a>
                     <h5 th:text="${post.getCreateAt()}"><span class="glyphicon glyphicon-time"></span></h5>
-                    <!--<p th:utext="${post.content.substring(0,200)}"></p>-->
+                    <p th:utext="${post.content.length() > 100 ? post.content.substring(0, 100) : post.content} + '...'"></p>
                 </div>
             </th:block>
 

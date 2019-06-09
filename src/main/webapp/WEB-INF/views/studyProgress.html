@@ -103,37 +103,37 @@
   </style>
 </head>
 <body>
-<div class="tree">
+<div class="tree" th:object="${readCategories}">
   <ul>
     <li>
-      <a th:href="@{/post/category/1}">Web app concept</a>
+      <a th:href="@{/post/category/1}" th:style="*{get(1)}?'background:#00fe01'">Web app concept</a>
       <ul>
         <li>
-          <a th:href="@{/post/category/2}">Front end</a>
+          <a th:href="@{/post/category/2}" th:style="*{get(2)}?'background:#00fe01'">Front end</a>
           <ul>
             <li>
-              <a th:href="@{/post/category/4}">HTML and CSS</a>
+              <a th:href="@{/post/category/4}" th:style="*{get(4)}?'background:#00fe01'">HTML and CSS</a>
             </li>
           </ul>
         </li>
         <li>
-          <a th:href="@{/post/category/3}">Back end</a>
+          <a th:href="@{/post/category/3}" th:style="*{get(3)}?'background:#00fe01'">Back end</a>
           <ul>
-            <li><a th:href="@{/post/category/5}">PHP</a></li>
+            <li><a th:href="@{/post/category/5}" th:style="*{get(5)}?'background:#00fe01'">PHP</a></li>
             <li>
-              <a th:href="@{/post/category/6}">Java</a>
+              <a th:href="@{/post/category/6}" th:style="*{get(6)}?'background:#00fe01'">Java</a>
               <ul>
                 <li>
-                  <a th:href="@{/post/category/}">other</a>
+                  <a th:href="@{/post/category/}" >other</a>
                 </li>
                 <li>
-                  <a th:href="@{/post/category/7}">JSP Servlet</a>
+                  <a th:href="@{/post/category/7}" th:style="*{get(7)}?'background:#00fe01'">JSP Servlet</a>
                       <ul>
                         <li>
-                          <a th:href="@{/post/category/8}">MVC</a>
+                          <a th:href="@{/post/category/8}" th:style="*{get(8)}?'background:#00fe01'">MVC</a>
                           <ul>
                             <li>
-                              <a th:href="@{/post/category/9}">Spring MVC</a>
+                              <a th:href="@{/post/category/9}" th:style="*{get(9)}?'background:#00fe01'">Spring MVC</a>
                             </li>
                           </ul>
                         </li>
