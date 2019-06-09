@@ -53,13 +53,12 @@
     </style>
 </head>
 <body>
-<h1>HI</h1>
 <nav th:replace="layout::header"></nav>
 <div class="container">
     <div class="row content">
         <div class="col-sm-3 sidenav">
             <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="#section1">Home</a></li>
+                <li class="active"><a href="/">Home</a></li>
                 <!--<li><a href="#section2">Friends</a></li>-->
                 <!--<li><a href="#section3">Family</a></li>-->
                 <!--<li><a href="#section3">Photos</a></li>-->
@@ -80,7 +79,7 @@
             <hr class="col-sm-12">
             <div class="col-sm-12">
 
-                <div style="display: inline-block;position: relative;bottom: 0px;" class="col-sm-12">
+                <div th:style="${isLogin}?'display: inline-block;position: relative;bottom: 0px;':'display:none'" class="col-sm-12">
                     <form th:action="@{/post/rate/__${post.id}__}" method="post">
                         <select name="rate" id="rate" onChange="this.form.submit()">
                             <option th:value="${1}">Very bad</option>
