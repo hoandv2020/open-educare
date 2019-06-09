@@ -86,7 +86,8 @@ public class PostController {
         ModelAndView modelAndView = new ModelAndView("posts/viewPost");
         List<Comment> comments = commentService.findAllByPostID(id);
         modelAndView.addObject("comments",comments);
-        modelAndView.addObject("post", postService.findById(id));
+        Post post = postService.findById(id);
+        modelAndView.addObject("post", post);
         User currentUser = (User) session.getAttribute("currentUser");
         boolean isLogin = false;
         if (currentUser!=null){

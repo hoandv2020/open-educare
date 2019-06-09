@@ -105,7 +105,7 @@
                     <button class="btn btn-success" href="#" onclick="window.history.back()">Back to topic</button>
                 </div>
 
-                <div style="display: inline-block" th:object="${session.getAttribute('currentUser')}" th:style="">
+                <div th:style="${isLogin}?'display: inline-block':'display:none'">
                     <div class="back">
                         <form th:action="@{/post/__${post.getId()}__/checkRead}" method="post"
                               th:value="isRead.checked">
