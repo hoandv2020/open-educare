@@ -31,7 +31,7 @@
         </div>
         <div class="col-sm-9">
             <h4><small>RECENT POSTS</small></h4>
-            <div class="create">
+            <div class="create" th:style="${isLogin}?'display:block':'display:none'">
                 <a href="/post/create">
                     Create New Post
                 </a>
