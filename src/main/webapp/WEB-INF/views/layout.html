@@ -22,7 +22,7 @@
             }
         </style>
         <form action="/post" method="post">
-        <input name="search" type="text" class="form-control" placeholder="Search...">
+        <input name="search" type="text" class="form-control" placeholder="Search..." style="margin-left: 350px;width: 800px;">
         <span class="input-group-btn">
           <button class="btn btn-default" type="submit">
             <span class="glyphicon glyphicon-search"></span>
@@ -33,9 +33,9 @@
         <span class="input-group-btn">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span></button>
                         <ul class="dropdown-menu">
-                          <li><a href="/user/login">Profile</a></li>
-                          <li><a th:href="@{/studyProgress}">Progress</a></li>
-                          <li><a href="/user/logout">Logout</a></li>
+                          <li><a th:href="@{/user/login}" th:utext="${isLogin}?'Profile':'Login'">Profile</a></li>
+                          <li><a th:href="@{/studyProgress}" th:style="${isLogin}?'display:block':'display:none'">Progress</a></li>
+                          <li><a href="/user/logout" th:style="${isLogin}?'display:block':'display:none'">Logout</a></li>
                         </ul>
                 </span>
     </div>
