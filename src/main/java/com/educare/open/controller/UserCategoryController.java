@@ -23,6 +23,10 @@ public class UserCategoryController {
     ModelAndView modelAndView = new ModelAndView("studyProgress");
     Map<Integer,Boolean> readCategories = userCategoryService.findAllReadCategoryByUserId(((User)httpSession.getAttribute("currentUser")).getId());
     modelAndView.addObject("readCategories",readCategories);
+    User currentUser = (User)httpSession.getAttribute("currentUser");
+    boolean isLogin = false;
+    if (currentUser!=null) isLogin =true;
+    modelAndView.addObject("isLogin",isLogin);
     return modelAndView ;
   }
 }

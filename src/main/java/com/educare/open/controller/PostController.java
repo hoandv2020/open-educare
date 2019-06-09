@@ -39,10 +39,13 @@ public class PostController {
     UserCategoryService userCategoryService;
 
     @GetMapping
-    public ModelAndView findAllByOrderByIdDesc(@PageableDefault(value = 10) Pageable pageable) {
+    public ModelAndView findAllByOrderByIdDesc(@PageableDefault(value = 10) Pageable pageable, HttpSession httpSession) {
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("posts", postService.findAllByOrderByIdDesc(pageable));
-
+        User currentUser = (User)httpSession.getAttribute("currentUser");
+        boolean isLogin = false;
+        if (currentUser!=null) isLogin =true;
+        modelAndView.addObject("isLogin",isLogin);
         return modelAndView;
     }
 
