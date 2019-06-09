@@ -110,9 +110,13 @@ public class PostController {
         return "redirect:/post/"+id;
     }
     @GetMapping("/category/{id}")
-    public ModelAndView searchByCategory(@PathVariable("id") Integer id, @PageableDefault(value = 10) Pageable pageable) {
+    public ModelAndView searchByCategory(@PathVariable("id") Integer id, @PageableDefault(value = 10) Pageable pageable,HttpSession httpSession) {
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("posts", postService.searchByCategoryId(id, pageable));
+        User currentUser = (User)httpSession.getAttribute("currentUser");
+        boolean isLogin = false;
+        if (currentUser!=null) isLogin =true;
+        modelAndView.addObject("isLogin",isLogin);
         return modelAndView;
     }
 
